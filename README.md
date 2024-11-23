@@ -1,66 +1,120 @@
-## Foundry
+# ERC20 Token Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A simple and secure ERC20 token implementation built with Solidity and using Foundry for development and testing.
 
-Foundry consists of:
+## Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project implements a standard ERC20 token using OpenZeppelin's battle-tested contracts. The token includes all standard ERC20 functionality including transfers, approvals, and allowances.
 
-## Documentation
+## Features
 
-https://book.getfoundry.sh/
+- Standard ERC20 implementation
+- OpenZeppelin base contracts for security
+- Comprehensive test suite
+- Foundry development environment
+- Gas-efficient operations
 
-## Usage
+## Prerequisites
 
-### Build
+- [Foundry](https://book.getfoundry.sh/getting-started/installation.html)
+- [Git](https://git-scm.com/downloads)
 
-```shell
-$ forge build
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Akkii4/foundry-erc20
+cd erc20-token
 ```
 
-### Test
-
-```shell
-$ forge test
+2. Install dependencies:
+```bash
+forge install
 ```
 
-### Format
+## Project Structure
 
-```shell
-$ forge fmt
+```
+.
+├── src/
+│   └── Token.sol        # Main token contract
+├── test/
+│   └── Token.t.sol      # Test suite
+├── script/
+│   └── Token.s.sol      # Deployment script
+└── README.md
 ```
 
-### Gas Snapshots
+## Smart Contracts
 
-```shell
-$ forge snapshot
+### Token.sol
+The main ERC20 token contract inherits from OpenZeppelin's ERC20 implementation:
+- Name: "Token"
+- Symbol: "TKN"
+- Decimals: 18
+- Initial Supply: Set during deployment
+
+## Testing
+
+The project includes a comprehensive test suite covering:
+- Basic token properties
+- Transfer functionality
+- Approval mechanism
+- Allowance management
+- Edge cases and fuzzing tests
+
+To run the tests:
+
+```bash
+# Run all tests
+forge test
+
+# Run tests with verbosity
+forge test -vv
+
+# Run tests with gas reporting
+forge test --gas-report
+
+# Run specific test
+forge test --match-test testTransfer
 ```
 
-### Anvil
+## Deployment
 
-```shell
-$ anvil
+1. Set up your environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
 ```
 
-### Deploy
+2. Deploy to a network:
+```bash
+# Local deployment
+forge script script/Token.s.sol:TokenScript --rpc-url localhost --broadcast
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+# Testnet deployment
+forge script script/Token.s.sol:TokenScript --rpc-url $RPC_URL --broadcast --verify -vvvv
 ```
 
-### Cast
+## Security
 
-```shell
-$ cast <subcommand>
-```
+- Built on OpenZeppelin's audited contracts
+- Comprehensive test coverage
+- Standard ERC20 implementation
 
-### Help
+## Gas Optimization
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+The contract is optimized for gas efficiency while maintaining security:
+- Uses OpenZeppelin's optimized implementations
+- Minimal storage operations
+- Efficient function implementations
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- OpenZeppelin for their secure contract implementations
+- Foundry for the development framework
+- The Ethereum community for their continuous support
